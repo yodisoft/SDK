@@ -1,0 +1,94 @@
+CREATE TABLE event_journal (
+	ordering BIGSERIAL NOT NULL PRIMARY KEY,
+    persistence_id VARCHAR(255) NOT NULL,
+    sequence_nr BIGINT NOT NULL,
+    is_deleted BOOLEAN NOT NULL,
+    created_at BIGINT NOT NULL,
+    manifest VARCHAR(500) NOT NULL,
+    payload BYTEA NOT NULL,
+    tags VARCHAR(100) NULL,
+    serializer_id INTEGER NULL,
+    CONSTRAINT event_journal_uq UNIQUE (persistence_id, sequence_nr)
+);
+
+CREATE TABLE snapshot_store (
+    persistence_id VARCHAR(255) NOT NULL,
+    sequence_nr BIGINT NOT NULL,
+    created_at BIGINT NOT NULL,
+    manifest VARCHAR(500) NOT NULL,
+    payload BYTEA NOT NULL,
+    serializer_id INTEGER NULL,
+    CONSTRAINT snapshot_store_pk PRIMARY KEY (persistence_id, sequence_nr)
+);
+
+CREATE TABLE metadata (
+    persistence_id VARCHAR(255) NOT NULL,
+    sequence_nr BIGINT NOT NULL,
+    CONSTRAINT metadata_pk PRIMARY KEY (persistence_id, sequence_nr)
+);
+
+
+
+
+		plugin = ""akka.persistence.journal.postgresql""
+        postgresql {
+# qualified type name of the PostgreSql persistence journal actor
+          class = ""Akka.Persistence.PostgreSql.Journal.PostgreSqlJournal, Akka.Persistence.PostgreSql""
+
+# dispatcher used to drive journal actor
+          plugin-dispatcher = ""akka.actor.default-dispatcher""
+
+# connection string used for database access
+          connection-string = ""Host=localhost;Port=5432;Database=akka;Username=postgres;Password=postgres""
+
+# default SQL commands timeout
+          connection-timeout = 30s
+
+# PostgreSql schema name to table corresponding with persistent journal
+          schema-name = public
+
+# PostgreSql table corresponding with persistent journal
+          table-name = event_journal
+
+# should corresponding journal table be initialized automatically
+          auto-initialize = off
+			
+# timestamp provider used for generation of journal entries timestamps
+          timestamp-provider = ""Akka.Persistence.Sql.Common.Journal.DefaultTimestampProvider, Akka.Persistence.Sql.Common""
+		
+# metadata table
+        metadata-table-name = metadata
+
+# defines column db type used to store payload. Available option: BYTEA (default), JSON, JSONB
+          stored-as = BYTEA
+    }
+
+
+
+
+		plugin = ""akka.persistence.snapshot-store.postgresql""
+        postgresql {
+# qualified type name of the PostgreSql persistence journal actor
+            class = ""Akka.Persistence.PostgreSql.Snapshot.PostgreSqlSnapshotStore, Akka.Persistence.PostgreSql""
+
+# dispatcher used to drive journal actor
+            plugin-dispatcher = """"akka.actor.default-dispatcher""""
+
+# connection string used for database access
+            connection-string = ""Host=localhost;Port=5432;Database=akka;Username=postgres;Password=postgres""
+
+# default SQL commands timeout
+            connection-timeout = 30s
+
+# PostgreSql schema name to table corresponding with persistent journal
+            schema-name = public
+
+# PostgreSql table corresponding with persistent journal
+            table-name = snapshot_store
+
+# should corresponding journal table be initialized automatically
+            auto-initialize = off
+			
+# defines column db type used to store payload. Available option: BYTEA (default), JSON, JSONB
+            stored-as = BYTEA
+    }

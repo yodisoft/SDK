@@ -1,0 +1,11 @@
+C:/gitlab/UDLplus/openspace/src/Zyfra.PS.OMMS.CR.WebApi
+C:/gitlab/UDLplus/openspace/src/Zyfra.PS.OMMS.CrManager.WebApi
+C:/gitlab/UDLplus/openspace/src/Zyfra.PS.OMMS.Node
+C:/gitlab/UDLplus/openspace/src/Zyfra.PS.OMMS.Seed
+C:/gitlab/UDLplus/openspace/src/Zyfra.Udl.DataCollector
+C:/gitlab/UDLplus/openspace/src/Zyfra.Udl.Dfa.WebApi
+C:/gitlab/UDLplus/openspace/src/Zyfra.Udl.DsEntity.WebApi
+C:/gitlab/UDLplus/openspace/src/Zyfra.Udl.MetricCollector
+C:/gitlab/UDLplus/openspace/src/Zyfra.Udl.Node
+C:/gitlab/UDLplus/openspace/src/Zyfra.Udl.Rtd.WebApi
+C:/gitlab/UDLplus/openspace/src/Zyfra.Udl.Seed

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <Version>1.0.3</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Authors>iliper</Authors>
+    <Company>Yodisoft</Company>
+    <DebugType>Full</DebugType>
+    <Product>Yodisoft.Utils.CheckVersion</Product>
+    <Description>Yodisoft.Utils.CheckVersion</Description>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+     <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Web.Xdt" Version="3.0.0" />
+    <PackageReference Include="NuGet.Core" Version="2.14.0" />
+  </ItemGroup>
+</Project>
+
+
